@@ -15,13 +15,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView mBearImage;
+    ImageView mImage;
     TextView mTextView;
-    int mLastClickedButton;
+    int mLastClickedButtonID;
     boolean completed;
     ArrayList <Integer> correctAnswer = new ArrayList();
     ArrayList <Integer> currentAnswer = new ArrayList();
-    char [] correctCharacter = {'ㄱ', 'ㅗ', 'ㅁ'};
+    final char [] correctCharacter = {'ㄱ', 'ㅗ', 'ㅁ'};
 
     final char[] ChoSung = {'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'};
     final char[] JungSung	= {'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'};
@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mLastClickedButton = -1;
-        mBearImage = (ImageView) findViewById(R.id.imageView);
+        mLastClickedButtonID = -1;
+        mImage = (ImageView) findViewById(R.id.imageView);
         mTextView = (TextView) findViewById(R.id.textView);
         mTextView.setText("");
         completed = false;
@@ -58,14 +58,17 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             if (v.getId() == correctAnswer.get(0)) {
                 findViewById(v.getId()).setBackgroundColor(Color.parseColor("#e35959"));
+                ((Button) findViewById(v.getId())).setTextColor(Color.parseColor("#f4bcbc"));
                 currentAnswer.add(v.getId());
                 mTextView.setText(String.valueOf(correctCharacter[0]));
             } else if (v.getId() == correctAnswer.get(1) && currentAnswer.size() >= 1) {
                 findViewById(v.getId()).setBackgroundColor(Color.parseColor("#e35959"));
+                ((Button) findViewById(v.getId())).setTextColor(Color.parseColor("#f4bcbc"));
                 mTextView.setText(String.valueOf(CharacterCombination(correctCharacter[0], correctCharacter[1], ' ')));
                 currentAnswer.add(v.getId());
             } else if (v.getId() == correctAnswer.get(2) && currentAnswer.size() >= 2) {
                 findViewById(v.getId()).setBackgroundColor(Color.parseColor("#e35959"));
+                ((Button) findViewById(v.getId())).setTextColor(Color.parseColor("#f4bcbc"));
                 currentAnswer.add(v.getId());
                 mTextView.setText(String.valueOf(CharacterCombination(correctCharacter[0], correctCharacter[1], correctCharacter[2])));
                 completed = true;
@@ -74,18 +77,18 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (!completed) {
-                mBearImage.setAlpha(0.3f);
+                mImage.setAlpha(0.3f);
             } else {
-                mBearImage.setImageDrawable(getResources().getDrawable(R.drawable.bear2));
-                mBearImage.setAlpha(1f);
+                mImage.setImageDrawable(getResources().getDrawable(R.drawable.bear2));
+                mImage.setAlpha(1f);
                 mTextView.setText(String.valueOf(CharacterCombination(correctCharacter[0], correctCharacter[1], correctCharacter[2])));
                 mTextView.setAlpha(0.3f);
             }
 
-            if(mLastClickedButton != - 1 && !currentAnswer.contains(mLastClickedButton)){
-                findViewById(mLastClickedButton).setBackground(getResources().getDrawable(R.drawable.button_border));
+            if(mLastClickedButtonID != - 1 && !currentAnswer.contains(mLastClickedButtonID)){
+                findViewById(mLastClickedButtonID).setBackground(getResources().getDrawable(R.drawable.button_border));
             }
-            mLastClickedButton = v.getId();
+            mLastClickedButtonID = v.getId();
         }
     };
 
