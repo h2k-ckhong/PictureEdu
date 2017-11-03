@@ -65,7 +65,8 @@
                       android:gravity="center"
                       android:text="ㄱ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick" />
 
                     <Button
                       android:id="@+id/button2"
@@ -83,7 +84,8 @@
                       android:gravity="center"
                       android:text="ㄴ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick"/>
 
                     <Button
                       android:id="@+id/button3"
@@ -101,7 +103,8 @@
                       android:gravity="center"
                       android:text="ㄷ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick"/>
 
                     <Button
                       android:id="@+id/button4"
@@ -119,7 +122,8 @@
                       android:gravity="center"
                       android:text="ㄹ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick"/>
 
                     <Button
                       android:id="@+id/button5"
@@ -137,7 +141,8 @@
                       android:gravity="center"
                       android:text="ㅁ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick"/>
 
                     <Space
                       android:layout_width="0dp"
@@ -201,7 +206,8 @@
                       android:gravity="center"
                       android:text="ㅏ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick" />
 
                     <Button
                       android:id="@+id/button7"
@@ -219,7 +225,8 @@
                       android:gravity="center"
                       android:text="ㅑ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick" />
 
                     <Button
                       android:id="@+id/button8"
@@ -237,7 +244,8 @@
                       android:gravity="center"
                       android:text="ㅓ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick" />
 
                     <Button
                       android:id="@+id/button9"
@@ -255,7 +263,8 @@
                       android:gravity="center"
                       android:text="ㅕ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick" />
 
                     <Button
                       android:id="@+id/button10"
@@ -273,7 +282,8 @@
                       android:gravity="center"
                       android:text="ㅗ"
                       android:textColor="#d2d2d2"
-                      android:textSize="100sp" />
+                      android:textSize="100sp"
+                      android:onClick="onButtonClick" />
 
                     <Space
                       android:layout_width="0dp"
