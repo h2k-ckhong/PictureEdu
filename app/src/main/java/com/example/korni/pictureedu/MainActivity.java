@@ -1,27 +1,30 @@
 package com.example.korni.pictureedu;
 
 import android.graphics.Color;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Locale;
+
+import static android.speech.tts.TextToSpeech.ERROR;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextToSpeech tts;
     ImageView mImage;
     TextView mTextView;
     Button[] buttons = new Button[10];
     int mLastClickedButtonID;
     int index;
     boolean completed;
+    boolean[] checkAnswer = {false,false,false};
     ArrayList <Integer> correctAnswer = new ArrayList();
     ArrayList <Integer> currentAnswer = new ArrayList();
 //    final char [] correctCharacter = {'ㄱ', 'ㅗ', 'ㅁ'};
@@ -71,14 +74,37 @@ public class MainActivity extends AppCompatActivity {
         correctAnswer.add(correctAnswerSet[index][1]);
         correctAnswer.add(correctAnswerSet[index][2]);
 
+        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener(){
+            @Override
+            public void onInit(int status){
+                if(status != ERROR){
+                    tts.setLanguage(Locale.KOREAN);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+
+        if(tts != null){
+            tts.stop();
+            tts.shutdown();
+            tts = null;
+        }
     }
 
     public void onButtonClick(View v){
         if (v.getId() == correctAnswer.get(0)) {
             findViewById(v.getId()).setBackgroundColor(Color.parseColor("#e35959"));
             ((Button) findViewById(v.getId())).setTextColor(Color.parseColor("#f4bcbc"));
-            currentAnswer.add(v.getId());
-            mTextView.setText(String.valueOf(correctCharacter[index][0]));
+            if(!checkAnswer[0]){
+                currentAnswer.add(v.getId());
+                mTextView.setText(String.valueOf(correctCharacter[index][0]));
+                checkAnswer[0] = true;
+            }
         } else if (v.getId() == correctAnswer.get(1) && currentAnswer.size() >= 1) {
             findViewById(v.getId()).setBackgroundColor(Color.parseColor("#e35959"));
             ((Button) findViewById(v.getId())).setTextColor(Color.parseColor("#f4bcbc"));
@@ -101,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
             mImage.setAlpha(1f);
             mTextView.setText(String.valueOf(CharacterCombination(correctCharacter[index][0], correctCharacter[index][1], correctCharacter[index][2])));
             mTextView.setAlpha(0.3f);
+            tts.setPitch(1.1f);
+            tts.setSpeechRate(0.7f);
+            tts.speak(mTextView.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
         }
 
         if(mLastClickedButtonID != - 1 && !currentAnswer.contains(mLastClickedButtonID)){
@@ -178,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
         currentAnswer.clear();
         mTextView.setText("");
         completed = false;
+        checkAnswer[0] = false;
         mImage.setImageDrawable(getResources().getDrawable(imageArray[index][0]));
 
         for(int i = 0; i < 10; i++){
